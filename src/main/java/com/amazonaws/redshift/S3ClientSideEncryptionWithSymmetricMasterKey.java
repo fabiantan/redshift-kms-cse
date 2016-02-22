@@ -43,7 +43,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class S3ClientSideEncryptionWithSymmetricMasterKey {
     private static final String masterKeyDir = System.getProperty("java.io.tmpdir");
-    private static final String bucketName = "fabtan-redshift";
+    private static final String bucketName = ""; // S3 bucket name 
     private static final String objectKey = "encrypted.txt";
     private static final String keyName = "secret.key.ciphertextblob";
     private static final String uploadFileName = "/var/www/java/general/kms/test.csv";
@@ -86,6 +86,7 @@ public class S3ClientSideEncryptionWithSymmetricMasterKey {
         File file = new File(uploadFileName);
     	encryptionClient.putObject(new PutObjectRequest(bucketName, objectKey,
                   file));
+	System.out.println("S3 file uploaded!");
         
         } catch (AmazonServiceException ase) {
             System.out.println("Caught an AmazonServiceException, which " +
@@ -105,8 +106,6 @@ public class S3ClientSideEncryptionWithSymmetricMasterKey {
                     "such as not being able to access the network.");
             System.out.println("Error Message: " + ace.getMessage());
         }
-	System.out.println("S3 file uploaded!");
-
     }
 
 }

@@ -37,7 +37,7 @@ public class dataKeyGenerator {
     public dataKeyGenerator() throws IOException {
 
         kmsClient = getClient();
-	String keyId = "arn:aws:kms:us-east-1:875340505775:key/9c824416-4fc3-4414-a1c4-b06866e16397";
+	String keyId = ""; // "arn:aws:kms:us-east-1:<AWSAccount>/key/<id>"
 	GenerateDataKeyRequest dataKeyRequest = new GenerateDataKeyRequest();
 	dataKeyRequest.setKeyId(keyId);
 	dataKeyRequest.setKeySpec("AES_256");
@@ -56,13 +56,13 @@ public class dataKeyGenerator {
         FileWriter keyfos2 = new FileWriter(keyDir + "/" + "secret.key.base64");
         keyfos2.write(Base64.getEncoder().encodeToString(plaintextKey.array()));
         keyfos2.close();
-	System.out.println("Base64 unencrypted key persisted");
+	System.out.println("Base64 unencrypted key persisted to /tmp");
 
 	// This can persist to the filesystem, as it is the encrypted ciphertext blob. 
         FileOutputStream keyfos3 = new FileOutputStream(keyDir + "/" + "secret.key.ciphertextblob");
         keyfos3.write(encryptedKey.array());
         keyfos3.close();
-	System.out.println("Encrypted cipherblob persisted");
+	System.out.println("Encrypted cipherblob persisted to /tmp");
 
 	/*DecryptRequest req = new DecryptRequest().withCiphertextBlob(encryptedKey);
 	ByteBuffer plainTextDecrypt = kmsClient.decrypt(req).getPlaintext();
