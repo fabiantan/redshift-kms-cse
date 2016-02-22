@@ -2,7 +2,7 @@
 
 ````
 # Things to configure:
-- KMS ID endpoint
+- KMS ID endpoint (currently, KMS endpoints hardcoded to US-EAST-1)
 - S3 bucket
 
 
